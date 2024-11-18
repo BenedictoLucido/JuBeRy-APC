@@ -1,0 +1,123 @@
+/* ----------- EVERYTHING TABLE ------------- */
+
+/* Table container */
+.availableDevicesTableContainer {
+    margin: 2em;
+}
+
+/* Table header styles */
+.tableHeader {
+    border: 1px solid #ddd;
+    padding: .5em;
+    background: #f2f2f2;
+    text-align: left;
+}
+
+.tableContainerHeader {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+/* Table cell styles */
+.tableCell {
+    border: 1px solid #ddd;
+    padding: .5em;
+    text-align: left;
+}
+
+/* Individual Table cell styles */
+.idColumn {
+    width: 5em; /* Adjust width for shorter numeric values */
+    text-align: left; /* Align the numbers centrally */
+}
+
+/* Table styling */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+
+    margin-top: 1em;
+}
+
+/* ----------- Modal Styles ------------- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+    z-index: 5; /* Ensure it's on top */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContent {
+    background-color: white;
+    padding: 2em;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.addUserButton {
+    appearance: none;
+    backface-visibility: hidden;
+    background-color: #27ae60;
+    border-radius: .5em;
+    border-style: none;
+    box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.5;
+    outline: none;
+    overflow: hidden;
+    padding: 1em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transform: translate3d(0, 0, 0);
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.addUserButton:hover {
+    background-color: #1e8449;
+    opacity: 1;
+    transform: translateY(0);
+    transition-duration: .35s;
+}
+
+.addUserForm input {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    font-size: 1em;
+    width: 100%;
+}
+
+.addUserForm button {
+    margin-top: 1em;
+    padding: 0.5em;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.addUserForm button:hover {
+    background-color: #45a049;
+}
