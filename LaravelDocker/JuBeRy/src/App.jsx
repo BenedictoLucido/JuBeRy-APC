@@ -1,4 +1,5 @@
-// App.jsx (Correct use of navigate)
+// src/App.jsx
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
@@ -7,7 +8,7 @@ function App() {
   const navigate = useNavigate();
 
   const goToProducts = () => {
-    navigate('/Dashboard');
+    navigate('/dashboard');  // Navigate to the Products page
   };
 
   return (
