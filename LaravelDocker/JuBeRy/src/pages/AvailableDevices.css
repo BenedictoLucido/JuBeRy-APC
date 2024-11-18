@@ -69,16 +69,12 @@
     background-color: #27ae60;
     border-radius: .5em;
     border-style: none;
-    box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
-    box-sizing: border-box;
     color: #fff;
     cursor: pointer;
     display: inline-block;
     font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
     font-size: 1em;
     font-weight: 600;
-    letter-spacing: normal;
-    line-height: 1.5;
     outline: none;
     overflow: hidden;
     padding: 1em;
