@@ -1,6 +1,14 @@
+# Docker-related files
 .docker/db/data/ca-key.pem
 .docker/db/data/
 .docker/phpmyadmin/sessions/
+
 # Laravel specific exclusions
 /bootstrap/cache
 /storage/*
+
+# Ignore any other sensitive or temporary files
+.env
+.idea/
+node_modules/
+vendor/
