@@ -36,6 +36,7 @@ services:
             - .docker/logs:/var/log/mysql
             - .docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
             - .docker/db/sql:/docker-entrypoint-initdb.d
+            - .docker/phpmyadmin/sessions:/sessions
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: refactorian

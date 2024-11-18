@@ -1,1 +1,3 @@
 .docker/db/data/ca-key.pem
+.docker/db/data/
+.docker/phpmyadmin/sessions/
