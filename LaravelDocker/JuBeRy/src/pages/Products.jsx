@@ -31,12 +31,12 @@ const Products = () => {
     <div>
       <h1>Products</h1>
       <ul>
-        {products.map((product) => (
-          <li key={product.product_id}>
-            <h3>{product.product_name}</h3>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            <p>Stock: {product.stock}</p>
+        {products.map((products) => (
+          <li key={products.product_id}>
+            <h3>{products.product_name}</h3>
+            <p>{products.description}</p>
+            <p>Price: ${products.price}</p>
+            <p>Stock: {products.stock}</p>
           </li>
         ))}
       </ul>

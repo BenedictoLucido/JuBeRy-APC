@@ -1,18 +1,16 @@
 const express = require('express');
 const mysql = require('mysql2');
-const cors = require('cors');  // Import cors once
+const cors = require('cors');  // Import cors
 
 const app = express();
 const port = 5000;
 
-// Use CORS to allow cross-origin requests
-app.use(cors());  // This will allow requests from any origin
-
-// Allow requests from your frontend's URL (e.g., GitHub Pages URL or localhost)
-// This line is sufficient if you want to specify a specific origin
-// app.use(cors({
-//   origin: 'https://fantastic-engine-7xggvpp7vxx2x9pr-3000.app.github.dev', // Replace with your frontend URL
-// }));
+// Allow requests from your frontend's URL
+app.use(cors({
+  origin: 'https://fantastic-engine-7xggvpp7vxx2x9pr-3000.app.github.dev', // Replace with your actual frontend URL
+  methods: ['GET', 'POST'], // Allowed HTTP methods
+  allowedHeaders: ['Content-Type'], // Allowed headers
+}));
 
 // Create a MySQL connection
 const db = mysql.createConnection({
