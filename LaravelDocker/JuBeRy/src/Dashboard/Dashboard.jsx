@@ -11,14 +11,6 @@ function Dashboard() {
       navigate('/Dashboard');
     };
 
-    const goToAvailableDevices = () => {
-        navigate('/AvailableDevices');
-    };
-
-    const goToUpdateAssetDevices = () => {
-      navigate('/UpdateAssetDevices');
-    };
-
     return (
         <div className="landingPage">
 
@@ -28,24 +20,9 @@ function Dashboard() {
           </div>
 
           <div className='landingPageHeaderFooter'>
-            <NavLink
-                to="/Dashboard"
-                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
-            >
-                DASHBOARD
-            </NavLink>
-            <NavLink
-                to="/AvailableDevices"
-                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
-            >
-                AVAILABLE DEVICES
-            </NavLink>
-            <NavLink
-                to="/UpdateAssetDevices"
-                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
-            >
-                UPDATE ASSET DEVICES
-            </NavLink>
+            <NavLink to="/Dashboard" className={({ isActive }) => `text ${isActive ? 'active' : ''}`}> DASHBOARD </NavLink>
+            <NavLink to="/AvailableDevices" className={({ isActive }) => `text ${isActive ? 'active' : ''}`}> AVAILABLE DEVICES </NavLink>
+            <NavLink to="/UpdateAssetDevices" className={({ isActive }) => `text ${isActive ? 'active' : ''}`}> UPDATE ASSET DEVICES </NavLink>
           </div>
     
           {/* Anything Header*/}
