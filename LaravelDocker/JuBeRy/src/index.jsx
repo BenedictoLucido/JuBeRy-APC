@@ -6,6 +6,7 @@ import App from './App';
 import Dashboard from './Dashboard/Dashboard'; // Import the Dashboard component
 import Products from './pages/Products'; // Import Products component (Make sure it's in the correct path)
 import AvailableDevices from './pages/AvailableDevices'; // Available Devices
+import UpdateAssetDevices from './pages/UpdateAssetDevices' // Update Asset Devices
 import reportWebVitals from './reportWebVitals';
 
 // Create root element and render app with routes
@@ -19,6 +20,7 @@ root.render(
         <Route path="/products" element={<Products />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/availableDevices" element={<AvailableDevices />} />
+        <Route path="/updateAssetDevices" element={<UpdateAssetDevices />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
