@@ -15,9 +15,8 @@ body{
   }
   
   .landingPageMainHeader img {
-    width: 20em;
-    height: 5em;
-    margin-right: 1em;
+    height: 130%;
+    cursor: pointer;
   }
   
   .landingPage {
@@ -28,8 +27,57 @@ body{
   
   .landingPageMainHeader{
     width: 100%;
-    height: 15vh;
+    height: 10vh;
+    background-color: #e7e0e0;
+  }
+
+  .landingPageHeaderFooter{
+    width: 100%;
+    height: 4vh;
     background-color: #059ee0;
+
+    position: relative;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .landingPageHeaderFooter .text{
+    padding: .3em;
+    margin-left: .8em;
+    
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+
+    cursor: pointer;
+  }
+
+  .landingPageHeaderFooter .text {
+    transition: transform 1s ease-in-out; /* Smooth transition for transform over 1 second */
+    text-decoration: none;
+  }
+
+  .landingPageHeaderFooter .text.active {
+    color: #bee8f5;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black, -1px 1px 1px black, 1px -1px 1px black; /* Black outline */
+  }
+  
+  .landingPageHeaderFooter .text:hover {
+    transform: scale(1.1) rotate(-10deg); /* Scales up and tilts left on hover */
+    animation: tilt .5s ease-in-out forwards; /* Applies the tilt animation */
+  }
+  
+  @keyframes tilt {
+    0% {
+      transform: scale(1.1) rotate(-2deg); /* Starts tilted left */
+    }
+    50% {
+      transform: scale(1.1) rotate(2deg); /* Tilts right */
+    }
+    100% {
+      transform: scale(1.1) rotate(0deg); /* Returns to normal degree */
+    }
   }
   
   /* Header */
