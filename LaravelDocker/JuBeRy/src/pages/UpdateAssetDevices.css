@@ -13,3 +13,26 @@
     transform: scale(1.1) rotate(-10deg); /* Scales up and tilts left on hover */
     animation: tilt .5s ease-in-out forwards; /* Applies the tilt animation */
   }
+
+/* Table container */
+.updateAssetDevicesTableContainer {
+  margin: 2em;
+}
+
+.updateAssetDevicesTableContainer h3 {
+  margin-left: .5em;
+}
+
+.returnBtn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 1em;
+}
+
+.returnBtn:hover {
+  background-color: #218838;
+}

@@ -298,15 +298,19 @@ function AvailableDevices() {
             {isViewAssetModalOpen && selectedAsset && (
                 <div className='viewAssetModal'>
                     <div className='viewAssetModalContent'>
-                        <h4>Asset Details</h4>
-                        <p><strong>Asset Tag:</strong> {selectedAsset.assetTag}</p>
-                        <p><strong>Device Name:</strong> {selectedAsset.deviceName}</p>
-                        <p><strong>Model:</strong> {selectedAsset.model}</p>
-                        <p><strong>Brand:</strong> {selectedAsset.brand}</p>
-                        <p><strong>Type:</strong> {selectedAsset.type}</p>
-                        <p><strong>Status:</strong> {selectedAsset.status}</p>
-                        <button onClick={handleIssuedButtonClick}>Issued</button>
-                        <button onClick={closeViewAssetModal}>Close</button>
+                        <h4 className='modalTitle'>Asset Details</h4>
+                        <div className='assetInfo'>
+                            <p><strong>Asset Tag:</strong> {selectedAsset.assetTag}</p>
+                            <p><strong>Device Name:</strong> {selectedAsset.deviceName}</p>
+                            <p><strong>Model:</strong> {selectedAsset.model}</p>
+                            <p><strong>Brand:</strong> {selectedAsset.brand}</p>
+                            <p><strong>Type:</strong> {selectedAsset.type}</p>
+                            <p><strong>Status:</strong> {selectedAsset.status}</p>
+                        </div>
+                        <div className='modalActions'>
+                            <button className='btn issueBtn' onClick={handleIssuedButtonClick}>Issue</button>
+                            <button className='btn closeBtn' onClick={closeViewAssetModal}>Close</button>
+                        </div>
                     </div>
                 </div>
             )}
