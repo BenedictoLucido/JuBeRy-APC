@@ -43,17 +43,28 @@ function AvailableDevices() {
     const [issuerName, setIssuerName] = useState('');
 
     // Load data from localStorage when component mounts
-    useEffect(() => {  
-        const storedData = JSON.parse(localStorage.getItem('users'));
+    useEffect(() => {
+        const storedData = localStorage.getItem('users');
         if (storedData) {
-            setData(storedData);
+            try {
+                const parsedData = JSON.parse(storedData);
+                if (Array.isArray(parsedData)) {
+                    setData(parsedData);
+                } else {
+                    console.error('Stored data is not in the expected format');
+                }
+            } catch (error) {
+                console.error('Error parsing stored data', error);
+            }
         }
-    }, []);
+    }, []);    
 
     // Save data to localStorage whenever data changes
     useEffect(() => {
-        localStorage.setItem('users', JSON.stringify(data));
-    }, [data]);
+        if (data && data.length > 0) {
+            localStorage.setItem('users', JSON.stringify(data));
+        }
+    }, [data]);    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -81,7 +92,7 @@ function AvailableDevices() {
         } else {
             alert('Please fill in all fields');
         }
-    };
+    };    
     
     const toggleAddNewUserModal = () => {
         setIsAddNewUserModalOpen(!isAddNewUserModalOpen);
