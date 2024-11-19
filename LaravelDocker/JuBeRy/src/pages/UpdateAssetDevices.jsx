@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import philtecLogo from '../Assets/philtecLogo.png';
 import './UpdateAssetDevices.css';
 
@@ -27,15 +28,24 @@ function UpdateAssetDevices() {
           </div>
 
           <div className='landingPageHeaderFooter'>
-            <div className='text' onClick={goToDashboard}> 
-              DASHBOARD
-            </div>
-            <div className='text' onClick={goToAvailableDevices}> 
-              AVAILABLE DEVICES
-            </div>
-            <div className='text' onClick={goToUpdateAssetDevices}> 
-              UPDATE ASSET DEVICES
-            </div>
+            <NavLink
+                to="/Dashboard"
+                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
+            >
+                DASHBOARD
+            </NavLink>
+            <NavLink
+                to="/AvailableDevices"
+                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
+            >
+                AVAILABLE DEVICES
+            </NavLink>
+            <NavLink
+                to="/UpdateAssetDevices"
+                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
+            >
+                UPDATE ASSET DEVICES
+            </NavLink>
           </div>
 
         </div>
