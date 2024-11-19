@@ -20,7 +20,7 @@ function AvailableDevices() {
     };
 
     const [data, setData] = useState([
-        { id: 1960000, name: "John Doe", age: 25, gender: "Male", number: "123-456-7890", status: "Not Issued" },
+        { id: 1960000, name: "John Corpuz", age: 25, gender: "Male", number: "123-456-7890", status: "Not Issued" },
         { id: 1960001, name: "Jane Smith", age: 30, gender: "Female", number: "987-654-3210", status: "Not Issued"},
         { id: 1960002, name: "Alice Brown", age: 22, gender: "Female", number: "555-123-4567", status: "Not Issued"},
         { id: 1960003, name: "Bob Johnson", age: 28, gender: "Male", number: "444-567-8901", status: "Not Issued"},
