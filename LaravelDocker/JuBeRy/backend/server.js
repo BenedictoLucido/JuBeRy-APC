@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const cors = require('cors');  // Import cors
 
 const app = express();
@@ -12,22 +12,23 @@ app.use(cors({
   allowedHeaders: ['Content-Type'], // Allowed headers
 }));
 
-// Create a MySQL connection
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'laravel_products' // Replace with your actual database name
+// Change the host based on where you're running the Node.js app
+const connection = mysql.createConnection({
+  host: 'localhost', // Use 'localhost' if you're running the Node.js app outside Docker
+  user: 'refactorian',
+  password: 'refactorian',
+  database: 'laravel_products',
+  port: 3306, // Ensure the port is correct
 });
 
-// Test DB connection
-db.connect(err => {
+connection.connect(err => {
   if (err) {
     console.error('Database connection failed:', err.stack);
     return;
   }
-  console.log('Connected to the database');
+  console.log('Connected to database');
 });
+
 
 // Set up middleware for JSON parsing
 app.use(express.json());
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Products API!');
 });
 
+// Define a simple API endpoint to fetch products from the database
 // Define a simple API endpoint to fetch products from the database
 app.get('/api/products', (req, res) => {
   db.query('SELECT * FROM products', (err, results) => {
@@ -49,6 +51,7 @@ app.get('/api/products', (req, res) => {
     res.json(results); // Send the products as JSON response
   });
 });
+
 
 // Start the server
 app.listen(port, () => {
