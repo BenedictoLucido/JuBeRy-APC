@@ -16,6 +16,40 @@
     animation: tilt .5s ease-in-out forwards; /* Applies the tilt animation */
   }
 
+  .addUserButton {
+    appearance: none;
+    backface-visibility: hidden;
+    background-color: #27ae60;
+    border-radius: .5em;
+    border-style: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    outline: none;
+    overflow: hidden;
+    padding: 1em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transform: translate3d(0, 0, 0);
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.addUserButton:hover {
+    background-color: #1e8449;
+    opacity: 1;
+    transform: translateY(0);
+    transition-duration: .35s;
+}
+
 /* ----------- EVERYTHING TABLE ------------- */
 
 /* Table container */
@@ -59,15 +93,15 @@
     margin-top: 1em;
 }
 
-/* ----------- New Aseet Modal Styles ------------- */
+/* ----------- New Asset Modal Styles ------------- */
 .addNewUserModal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
-    z-index: 5; /* Ensure it's on top */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,64 +110,95 @@
 .addNewUserModalContent {
     background-color: white;
     padding: 2em;
+    width: 400px;
     border-radius: 8px;
-    width: 300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
-.addUserButton {
-    appearance: none;
-    backface-visibility: hidden;
-    background-color: #27ae60;
-    border-radius: .5em;
-    border-style: none;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
-    font-size: 1em;
-    font-weight: 600;
-    outline: none;
-    overflow: hidden;
-    padding: 1em;
-    position: relative;
+h1 {
     text-align: center;
-    text-decoration: none;
-    transform: translate3d(0, 0, 0);
-    transition: all .3s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: top;
-    white-space: nowrap;
+    margin-bottom: 1em;
 }
 
-.addUserButton:hover {
-    background-color: #1e8449;
-    opacity: 1;
-    transform: translateY(0);
-    transition-duration: .35s;
+.addNewUserForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
-.addUserForm input {
-    margin: 0.5em 0;
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+input[type="text"],
+input[type="number"],
+select {
     padding: 0.5em;
     font-size: 1em;
-    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
-.addUserForm button {
-    margin-top: 1em;
-    padding: 0.5em;
-    font-size: 1em;
+select {
     cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
 }
 
-.addUserForm button:hover {
-    background-color: #45a049;
+.radioGroup {
+    display: flex;
+    gap: 1em;
+}
+
+.radioGroup label {
+    font-weight: normal;
+}
+
+button {
+    padding: 0.75em;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.addNewUserModalButton {
+    background-color: #27ae60;
+    color: white;
+}
+
+.addNewUserModalButton:hover {
+    background-color: #1e8449;
+}
+
+.closeAddNewUserModalButton {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.closeAddNewUserModalButton:hover {
+    background-color: #c0392b;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Standard */
 }
 
 /* ----------- View Asset Modal Styles ------------- */
