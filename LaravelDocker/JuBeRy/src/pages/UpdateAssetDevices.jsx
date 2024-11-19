@@ -22,31 +22,16 @@ function UpdateAssetDevices() {
     return(
         <div className='availableDevicesPage'>
 
-            {/* Main Man Header */}
-          <div className="landingPageMainHeader">
+        {/* Main Man Header */}
+        <div className="landingPageMainHeader">
             <img src={philtecLogo} alt="rndmImg" onClick={goToDashboard} />
-          </div>
+        </div>
 
-          <div className='landingPageHeaderFooter'>
-            <NavLink
-                to="/Dashboard"
-                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
-            >
-                DASHBOARD
-            </NavLink>
-            <NavLink
-                to="/AvailableDevices"
-                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
-            >
-                AVAILABLE DEVICES
-            </NavLink>
-            <NavLink
-                to="/UpdateAssetDevices"
-                className={({ isActive }) => `text ${isActive ? 'active' : ''}`}
-            >
-                UPDATE ASSET DEVICES
-            </NavLink>
-          </div>
+        <div className='landingPageHeaderFooter'>
+            <NavLink to="/Dashboard" className={({ isActive }) => `text ${isActive ? 'active' : ''}`}>DASHBOARD</NavLink>
+            <NavLink to="/AvailableDevices" className={({ isActive }) => `text ${isActive ? 'active' : ''}`}>AVAILABLE DEVICES</NavLink>
+            <NavLink to="/UpdateAssetDevices" className={({ isActive }) => `text ${isActive ? 'active' : ''}`}>UPDATE ASSET DEVICES</NavLink>
+        </div>
 
         </div>
     );
