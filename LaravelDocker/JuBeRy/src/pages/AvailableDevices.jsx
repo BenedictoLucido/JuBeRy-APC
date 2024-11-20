@@ -93,6 +93,20 @@ function AvailableDevices() {
             alert('Please fill in all fields');
         }
     };    
+
+    const handleDeleteAsset = () => {
+        if (selectedAsset) {
+            // Delete the selected asset using the assetTag
+            deleteAsset(selectedAsset.assetTag);
+    
+            // Close the modal after deletion
+            closeViewAssetModal();
+        }
+    };
+    
+    const deleteAsset = (assetTag) => {
+        setData(prevData => prevData.filter(asset => asset.assetTag !== assetTag));
+    };  
     
     const toggleAddNewUserModal = () => {
         setIsAddNewUserModalOpen(!isAddNewUserModalOpen);
@@ -309,6 +323,7 @@ function AvailableDevices() {
                         </div>
                         <div className='modalActions'>
                             <button className='btn issueBtn' onClick={handleIssuedButtonClick}>Issue</button>
+                            <button className='btn deleteBtn' onClick={handleDeleteAsset}>Delete</button>
                             <button className='btn closeBtn' onClick={closeViewAssetModal}>Close</button>
                         </div>
                     </div>

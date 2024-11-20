@@ -287,12 +287,20 @@ input[type="number"] {
 }
 
 .closeBtn {
-    background-color: #dc3545;
+    background-color: #fdd296;
     color: white;
 }
 
 .closeBtn:hover {
-    background-color: #c82333;
+    background-color: #fde396;
+}
+
+.deleteBtn {
+    background-color: rgb(252, 126, 126);
+}
+
+.deleteBtn:hover {
+    background-color: rgb(192, 95, 95);
 }
 
 /************--------- Confirmation MOdal -----------*******/
