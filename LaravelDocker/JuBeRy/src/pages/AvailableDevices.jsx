@@ -19,12 +19,26 @@ function AvailableDevices() {
         navigate('/UpdateAssetDevices');
     };
 
-    const [data, setData] = useState([
-        { assetTag: 1960000, deviceName: "Laptop", model: "5400", brand: "Dell", type: "Service Unit", status: "Not Issued" },
-        { assetTag: 1960001, deviceName: "Laptop", model: "T14", brand: "Lenovo", type: "Inventory", status: "Not Issued"},
-        { assetTag: 1960002, deviceName: "Laptop", model: "T490", brand: "Lenovo", type: "Service Unit", status: "Not Issued"},
-        { assetTag: 1960003, deviceName: "Laptop", model: "5440", brand: "Dell", type: "Inventory", status: "Not Issued"},
-    ]);
+    const [data, setData] = useState(() => {
+        const storedData = localStorage.getItem('users');
+        if (storedData) {
+            try {
+                const parsedData = JSON.parse(storedData);
+                if (Array.isArray(parsedData)) {
+                    return parsedData; // Use stored data if available
+                }
+            } catch (error) {
+                console.error('Error parsing stored data', error);
+            }
+        }
+        // Fallback to default data
+        return [
+            { assetTag: 1960000, deviceName: "Laptop", model: "5400", brand: "Dell", type: "Service Unit", status: "Not Issued" },
+            { assetTag: 1960001, deviceName: "Laptop", model: "T14", brand: "Lenovo", type: "Inventory", status: "Not Issued"},
+            { assetTag: 1960002, deviceName: "Laptop", model: "T490", brand: "Lenovo", type: "Service Unit", status: "Not Issued"},
+            { assetTag: 1960003, deviceName: "Laptop", model: "5440", brand: "Dell", type: "Inventory", status: "Not Issued"},
+        ];
+    });
 
     const [newUser, setNewUser] = useState({
         assetTag: '',
