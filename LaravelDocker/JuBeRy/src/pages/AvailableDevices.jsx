@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import philtecLogo from '../Assets/philtecLogo.png';
@@ -20,18 +20,18 @@ function AvailableDevices() {
     };
 
     const [data, setData] = useState([
-        { id: 1960000, name: "John Corpuz", age: 25, gender: "Male", number: "123-456-7890", status: "Not Issued" },
-        { id: 1960001, name: "Jane Smith", age: 30, gender: "Female", number: "987-654-3210", status: "Not Issued"},
-        { id: 1960002, name: "Alice Brown", age: 22, gender: "Female", number: "555-123-4567", status: "Not Issued"},
-        { id: 1960003, name: "Bob Johnson", age: 28, gender: "Male", number: "444-567-8901", status: "Not Issued"},
+        { assetTag: 1960000, deviceName: "Laptop", model: "5400", brand: "Dell", type: "Service Unit", status: "Not Issued" },
+        { assetTag: 1960001, deviceName: "Laptop", model: "T14", brand: "Lenovo", type: "Inventory", status: "Not Issued"},
+        { assetTag: 1960002, deviceName: "Laptop", model: "T490", brand: "Lenovo", type: "Service Unit", status: "Not Issued"},
+        { assetTag: 1960003, deviceName: "Laptop", model: "5440", brand: "Dell", type: "Inventory", status: "Not Issued"},
     ]);
 
     const [newUser, setNewUser] = useState({
-        id: '',
-        name: '',
-        age: '',
-        gender: '',
-        number: '',
+        assetTag: '',
+        deviceName: 'Laptop',
+        model: '',
+        brand: '',
+        type: '',
         status: 'Not Issued'
     });
 
@@ -42,6 +42,30 @@ function AvailableDevices() {
     const [selectedAsset, setSelectedAsset] = useState(null);
     const [issuerName, setIssuerName] = useState('');
 
+    // Load data from localStorage when component mounts
+    useEffect(() => {
+        const storedData = localStorage.getItem('users');
+        if (storedData) {
+            try {
+                const parsedData = JSON.parse(storedData);
+                if (Array.isArray(parsedData)) {
+                    setData(parsedData);
+                } else {
+                    console.error('Stored data is not in the expected format');
+                }
+            } catch (error) {
+                console.error('Error parsing stored data', error);
+            }
+        }
+    }, []);    
+
+    // Save data to localStorage whenever data changes
+    useEffect(() => {
+        if (data && data.length > 0) {
+            localStorage.setItem('users', JSON.stringify(data));
+        }
+    }, [data]);    
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewUser({
@@ -51,25 +75,39 @@ function AvailableDevices() {
     };
 
     const handleAddUser = () => {
-        if (newUser.id && newUser.name && newUser.age && newUser.gender && newUser.number && newUser.status) {
+        if (newUser.assetTag && newUser.deviceName && newUser.model && newUser.brand && newUser.type) {
             setData([
                 ...data,
                 {
-                    id: parseInt(newUser.id),
-                    name: newUser.name,
-                    age: parseInt(newUser.age),
-                    gender: newUser.gender,
-                    number: newUser.number,
-                    status: newUser.status,
+                    assetTag: parseInt(newUser.assetTag),
+                    deviceName: newUser.deviceName,
+                    model: newUser.model,
+                    brand: newUser.brand,
+                    type: newUser.type,
+                    status: newUser.status,  // status will always be "Not Issued" by default
                 }
             ]);
-            setNewUser({ id: '', name: '', age: '', gender: '', number: '', status: '' });
+            setNewUser({ assetTag: '', deviceName: 'Laptop', model: '', brand: '', type: '', status: 'Not Issued' }); // reset values
             setIsAddNewUserModalOpen(false);
         } else {
             alert('Please fill in all fields');
         }
-    };
+    };    
 
+    const handleDeleteAsset = () => {
+        if (selectedAsset) {
+            // Delete the selected asset using the assetTag
+            deleteAsset(selectedAsset.assetTag);
+    
+            // Close the modal after deletion
+            closeViewAssetModal();
+        }
+    };
+    
+    const deleteAsset = (assetTag) => {
+        setData(prevData => prevData.filter(asset => asset.assetTag !== assetTag));
+    };  
+    
     const toggleAddNewUserModal = () => {
         setIsAddNewUserModalOpen(!isAddNewUserModalOpen);
     };
@@ -95,7 +133,7 @@ function AvailableDevices() {
     const handleConfirm = () => {
         // Update the status to "Issued" and add the issuer's name
         const updatedData = data.map((asset) =>
-            asset.id === selectedAsset.id ? { ...asset, status: 'Issued', issuedBy: issuerName } : asset
+            asset.assetTag === selectedAsset.assetTag ? { ...asset, status: 'Issued', issuedBy: issuerName } : asset
         );
         setData(updatedData);
         setIsConfirmModalOpen(false);
@@ -129,17 +167,17 @@ function AvailableDevices() {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th className='tableHeader'>ID:</th>
-                            <th className="tableHeader">Name</th>
-                            <th className="tableHeader">Age</th>
-                            <th className="tableHeader">Gender</th>
-                            <th className="tableHeader">Number</th>
+                            <th className='tableHeader'>Asset Tag</th>
+                            <th className="tableHeader">Device</th>
+                            <th className="tableHeader">Model</th>
+                            <th className="tableHeader">Brand</th>
+                            <th className="tableHeader">Type</th>
                             <th className="tableHeader">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.map((user) => (
-                            <tr key={user.id}>
+                            <tr key={user.assetTag}>
                                 <td
                                     className='tableCell idColumn'
                                     onClick={() => {
@@ -147,12 +185,12 @@ function AvailableDevices() {
                                         setIsViewAssetModalOpen(true);
                                     }}
                                 >
-                                    {user.id}
+                                    {user.assetTag}
                                 </td>
-                                <td className="tableCell">{user.name}</td>
-                                <td className="tableCell">{user.age}</td>
-                                <td className="tableCell">{user.gender}</td>
-                                <td className="tableCell">{user.number}</td>
+                                <td className="tableCell">{user.deviceName}</td>
+                                <td className="tableCell">{user.model}</td>
+                                <td className="tableCell">{user.brand}</td>
+                                <td className="tableCell">{user.type}</td>
                                 <td className="tableCell">{user.status}</td>
                             </tr>
                         ))}
@@ -161,32 +199,133 @@ function AvailableDevices() {
             </div>
 
             {isAddNewUserModalOpen && (
-                <div className="addNewUserModal">
-                    <div className="addNewUserModalContent">
-                        <h4>Add New User</h4>
-                        <input type="number" name="id" placeholder="ID" value={newUser.id} onChange={handleInputChange} />
-                        <input type="text" name="name" placeholder="Name" value={newUser.name} onChange={handleInputChange} />
-                        <input type="number" name="age" placeholder="Age" value={newUser.age} onChange={handleInputChange} />
-                        <input type="text" name="gender" placeholder="Gender" value={newUser.gender} onChange={handleInputChange} />
-                        <input type="text" name="number" placeholder="Number" value={newUser.number} onChange={handleInputChange} />
-                        <button onClick={handleAddUser}>Add User</button>
-                        <button onClick={toggleAddNewUserModal}>Close</button>
+            <div className="addNewUserModal">
+                <div className="addNewUserModalContent">
+                <h1>Add New Asset</h1>
+
+                <form className="addNewUserForm">
+                    <div className="formGroup">
+                    <label htmlFor="assetTag">Asset Tag</label>
+                    <input
+                        type="number"
+                        name="assetTag"
+                        id="assetTag"
+                        placeholder="Asset Tag"
+                        value={newUser.assetTag}
+                        onChange={handleInputChange}
+                    />
                     </div>
+
+                    <div className="formGroup">
+                    <label htmlFor="deviceName">Device Name</label>
+                    <input
+                        type="text"
+                        name="deviceName"
+                        id="deviceName"
+                        value="Laptop"
+                        readOnly
+                    />
+                    </div>
+
+                    <div className="formGroup">
+                    <label htmlFor="model">Model</label>
+                    <select
+                        name="model"
+                        id="model"
+                        value={newUser.model}
+                        onChange={handleInputChange}
+                    >
+                        <option value="5400">5400</option>
+                        <option value="T14">T14</option>
+                        <option value="T490">T490</option>
+                        <option value="5440">5440</option>
+                    </select>
+                    </div>
+
+                    <div className="formGroup">
+                    <label>Brand</label>
+                    <div className="radioGroup">
+                        <label>
+                        <input
+                            type="radio"
+                            name="brand"
+                            value="Dell"
+                            checked={newUser.brand === 'Dell'}
+                            onChange={handleInputChange}
+                        /> Dell
+                        </label>
+                        <label>
+                        <input
+                            type="radio"
+                            name="brand"
+                            value="Lenovo"
+                            checked={newUser.brand === 'Lenovo'}
+                            onChange={handleInputChange}
+                        /> Lenovo
+                        </label>
+                    </div>
+                    </div>
+
+                    <div className="formGroup">
+                    <label>Type</label>
+                    <div className="radioGroup">
+                        <label>
+                        <input
+                            type="radio"
+                            name="type"
+                            value="service unit"
+                            checked={newUser.type === 'service unit'}
+                            onChange={handleInputChange}
+                        /> Service Unit
+                        </label>
+                        <label>
+                        <input
+                            type="radio"
+                            name="type"
+                            value="inventory"
+                            checked={newUser.type === 'inventory'}
+                            onChange={handleInputChange}
+                        /> Inventory
+                        </label>
+                    </div>
+                    </div>
+
+                    {/* Adding status field with default value */}
+                    <div className="formGroup">
+                    <label htmlFor="status">Status</label>
+                    <input
+                        type="text"
+                        name="status"
+                        id="status"
+                        value="Not Issued"
+                        readOnly
+                    />
+                    </div>
+
+                    <button type="button" className="addNewUserModalButton" onClick={handleAddUser}>Add Asset</button>
+                    <button type="button" className="closeAddNewUserModalButton" onClick={toggleAddNewUserModal}>Close</button>
+                </form>
                 </div>
+            </div>
             )}
 
             {isViewAssetModalOpen && selectedAsset && (
                 <div className='viewAssetModal'>
                     <div className='viewAssetModalContent'>
-                        <h4>Asset Details</h4>
-                        <p><strong>ID:</strong> {selectedAsset.id}</p>
-                        <p><strong>Name:</strong> {selectedAsset.name}</p>
-                        <p><strong>Age:</strong> {selectedAsset.age}</p>
-                        <p><strong>Gender:</strong> {selectedAsset.gender}</p>
-                        <p><strong>Number:</strong> {selectedAsset.number}</p>
-                        <p><strong>Status:</strong> {selectedAsset.status}</p>
-                        <button onClick={handleIssuedButtonClick}>Issued</button>
-                        <button onClick={closeViewAssetModal}>Close</button>
+                        <h4 className='modalTitle'>Asset Details</h4>
+                        <div className='assetInfo'>
+                            <p><strong>Asset Tag:</strong> {selectedAsset.assetTag}</p>
+                            <p><strong>Device Name:</strong> {selectedAsset.deviceName}</p>
+                            <p><strong>Model:</strong> {selectedAsset.model}</p>
+                            <p><strong>Brand:</strong> {selectedAsset.brand}</p>
+                            <p><strong>Type:</strong> {selectedAsset.type}</p>
+                            <p><strong>Status:</strong> {selectedAsset.status}</p>
+                        </div>
+                        <div className='modalActions'>
+                            <button className='btn issueBtn' onClick={handleIssuedButtonClick}>Issue</button>
+                            <button className='btn deleteBtn' onClick={handleDeleteAsset}>Delete</button>
+                            <button className='btn closeBtn' onClick={closeViewAssetModal}>Close</button>
+                        </div>
                     </div>
                 </div>
             )}
