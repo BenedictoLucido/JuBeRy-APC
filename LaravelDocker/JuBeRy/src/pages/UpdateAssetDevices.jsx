@@ -40,16 +40,15 @@ function UpdateAssetDevices() {
 
     // Save data to localStorage whenever data changes
     useEffect(() => {
-        if (data && data.length > 0) {
-            localStorage.setItem('assets', JSON.stringify(data));
-        }
+        console.log('Updating localStorage:', data); // Debugging: Log data before saving
+        localStorage.setItem('assets', JSON.stringify(data));
     }, [data]);
-
     const closeViewAssetModal = () => {
         setIsViewAssetModalOpen(false);
         setSelectedAsset(null);
     };
 
+    // Update status of the asset and persist the change
     const handleReturnAsset = (assetTag) => {
         const updatedData = data.map((asset) =>
             asset.assetTag === assetTag
@@ -57,7 +56,9 @@ function UpdateAssetDevices() {
                 : asset
         );
         setData(updatedData);
-        closeViewAssetModal(); // Optionally close the modal after returning the asset
+        localStorage.setItem('assets', JSON.stringify(updatedData)); // Save changes immediately
+        console.log('Asset returned and saved to localStorage:', updatedData); // Debugging
+        closeViewAssetModal();
     };
 
     return (
@@ -124,8 +125,8 @@ function UpdateAssetDevices() {
                         <div className='modalActions'>
                             <button className='btn closeBtn' onClick={closeViewAssetModal}>Close</button>
                             {selectedAsset.status === "Issued" && (
-                                <button 
-                                    className='btn returnBtn' 
+                                <button
+                                    className='btn returnBtn'
                                     onClick={() => handleReturnAsset(selectedAsset.assetTag)}
                                 >
                                     Return
