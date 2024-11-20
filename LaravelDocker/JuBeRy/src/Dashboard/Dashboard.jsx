@@ -57,9 +57,7 @@ function Dashboard() {
               </div>
     
               <div className="body"> {/* Body */}
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Faucibus in libero risus semper habitant arcu eget. 
-              Et integer facilisi eget diam.Lorem ipsum dolor sit ame,consectetur 
+              This project is all about implementing and Asset Movement inside the codespace.
               </div>
        
             </div>

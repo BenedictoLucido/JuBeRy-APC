@@ -34,9 +34,9 @@ function AvailableDevices() {
         // Fallback to default data
         return [
             { assetTag: 1960000, deviceName: "Laptop", model: "5400", brand: "Dell", type: "Service Unit", status: "Not Issued" },
-            { assetTag: 1960001, deviceName: "Laptop", model: "T14", brand: "Lenovo", type: "Inventory", status: "Not Issued" },
-            { assetTag: 1960002, deviceName: "Laptop", model: "T490", brand: "Lenovo", type: "Service Unit", status: "Not Issued" },
-            { assetTag: 1960003, deviceName: "Laptop", model: "5440", brand: "Dell", type: "Inventory", status: "Not Issued" },
+            { assetTag: 1960001, deviceName: "Laptop", model: "T14", brand: "Lenovo", type: "Inventory", status: "Not Issued"},
+            { assetTag: 1960002, deviceName: "Laptop", model: "T490", brand: "Lenovo", type: "Service Unit", status: "Not Issued"},
+            { assetTag: 1960003, deviceName: "Laptop", model: "5440", brand: "Dell", type: "Inventory", status: "Not Issued"},
         ];
     });
 
