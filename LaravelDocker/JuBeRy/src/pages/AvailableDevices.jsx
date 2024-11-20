@@ -40,6 +40,7 @@ function AvailableDevices() {
         ];
     });
 
+
     const [newUser, setNewUser] = useState({
         assetTag: '',
         deviceName: 'Laptop',
@@ -71,14 +72,15 @@ function AvailableDevices() {
                 console.error('Error parsing stored data', error);
             }
         }
-    }, []);    
+    }, []);
 
     // Save data to localStorage whenever data changes
     useEffect(() => {
         if (data && data.length > 0) {
             localStorage.setItem('users', JSON.stringify(data));
+            console.log(localStorage);
         }
-    }, [data]);    
+    }, [data]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -106,8 +108,8 @@ function AvailableDevices() {
         } else {
             alert('Please fill in all fields');
         }
-    };    
 
+    };    
     const handleDeleteAsset = () => {
         if (selectedAsset) {
             // Delete the selected asset using the assetTag
@@ -121,7 +123,6 @@ function AvailableDevices() {
     const deleteAsset = (assetTag) => {
         setData(prevData => prevData.filter(asset => asset.assetTag !== assetTag));
     };  
-    
     const toggleAddNewUserModal = () => {
         setIsAddNewUserModalOpen(!isAddNewUserModalOpen);
     };
@@ -158,6 +159,7 @@ function AvailableDevices() {
     const handleCancelConfirm = () => {
         setIsConfirmModalOpen(false);
     };
+
 
     return (
         <div className='availableDevicesPage'>
@@ -213,114 +215,114 @@ function AvailableDevices() {
             </div>
 
             {isAddNewUserModalOpen && (
-            <div className="addNewUserModal">
-                <div className="addNewUserModalContent">
-                <h1>Add New Asset</h1>
+                <div className="addNewUserModal">
+                    <div className="addNewUserModalContent">
+                        <h1>Add New Asset</h1>
 
-                <form className="addNewUserForm">
-                    <div className="formGroup">
-                    <label htmlFor="assetTag">Asset Tag</label>
-                    <input
-                        type="number"
-                        name="assetTag"
-                        id="assetTag"
-                        placeholder="Asset Tag"
-                        value={newUser.assetTag}
-                        onChange={handleInputChange}
-                    />
-                    </div>
+                        <form className="addNewUserForm">
+                            <div className="formGroup">
+                                <label htmlFor="assetTag">Asset Tag</label>
+                                <input
+                                    type="number"
+                                    name="assetTag"
+                                    id="assetTag"
+                                    placeholder="Asset Tag"
+                                    value={newUser.assetTag}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
 
-                    <div className="formGroup">
-                    <label htmlFor="deviceName">Device Name</label>
-                    <input
-                        type="text"
-                        name="deviceName"
-                        id="deviceName"
-                        value="Laptop"
-                        readOnly
-                    />
-                    </div>
+                            <div className="formGroup">
+                                <label htmlFor="deviceName">Device Name</label>
+                                <input
+                                    type="text"
+                                    name="deviceName"
+                                    id="deviceName"
+                                    value="Laptop"
+                                    readOnly
+                                />
+                            </div>
 
-                    <div className="formGroup">
-                    <label htmlFor="model">Model</label>
-                    <select
-                        name="model"
-                        id="model"
-                        value={newUser.model}
-                        onChange={handleInputChange}
-                    >
-                        <option value="5400">5400</option>
-                        <option value="T14">T14</option>
-                        <option value="T490">T490</option>
-                        <option value="5440">5440</option>
-                    </select>
-                    </div>
+                            <div className="formGroup">
+                                <label htmlFor="model">Model</label>
+                                <select
+                                    name="model"
+                                    id="model"
+                                    value={newUser.model}
+                                    onChange={handleInputChange}
+                                >
+                                    <option value="5400">5400</option>
+                                    <option value="T14">T14</option>
+                                    <option value="T490">T490</option>
+                                    <option value="5440">5440</option>
+                                </select>
+                            </div>
 
-                    <div className="formGroup">
-                    <label>Brand</label>
-                    <div className="radioGroup">
-                        <label>
-                        <input
-                            type="radio"
-                            name="brand"
-                            value="Dell"
-                            checked={newUser.brand === 'Dell'}
-                            onChange={handleInputChange}
-                        /> Dell
-                        </label>
-                        <label>
-                        <input
-                            type="radio"
-                            name="brand"
-                            value="Lenovo"
-                            checked={newUser.brand === 'Lenovo'}
-                            onChange={handleInputChange}
-                        /> Lenovo
-                        </label>
-                    </div>
-                    </div>
+                            <div className="formGroup">
+                                <label>Brand</label>
+                                <div className="radioGroup">
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="brand"
+                                            value="Dell"
+                                            checked={newUser.brand === 'Dell'}
+                                            onChange={handleInputChange}
+                                        /> Dell
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="brand"
+                                            value="Lenovo"
+                                            checked={newUser.brand === 'Lenovo'}
+                                            onChange={handleInputChange}
+                                        /> Lenovo
+                                    </label>
+                                </div>
+                            </div>
 
-                    <div className="formGroup">
-                    <label>Type</label>
-                    <div className="radioGroup">
-                        <label>
-                        <input
-                            type="radio"
-                            name="type"
-                            value="service unit"
-                            checked={newUser.type === 'service unit'}
-                            onChange={handleInputChange}
-                        /> Service Unit
-                        </label>
-                        <label>
-                        <input
-                            type="radio"
-                            name="type"
-                            value="inventory"
-                            checked={newUser.type === 'inventory'}
-                            onChange={handleInputChange}
-                        /> Inventory
-                        </label>
-                    </div>
-                    </div>
+                            <div className="formGroup">
+                                <label>Type</label>
+                                <div className="radioGroup">
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="type"
+                                            value="service unit"
+                                            checked={newUser.type === 'service unit'}
+                                            onChange={handleInputChange}
+                                        /> Service Unit
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="type"
+                                            value="inventory"
+                                            checked={newUser.type === 'inventory'}
+                                            onChange={handleInputChange}
+                                        /> Inventory
+                                    </label>
+                                </div>
+                            </div>
 
-                    {/* Adding status field with default value */}
-                    <div className="formGroup">
-                    <label htmlFor="status">Status</label>
-                    <input
-                        type="text"
-                        name="status"
-                        id="status"
-                        value="Not Issued"
-                        readOnly
-                    />
-                    </div>
+                            {/* Adding status field with default value */}
+                            <div className="formGroup">
+                                <label htmlFor="status">Status</label>
+                                <input
+                                    type="text"
+                                    name="status"
+                                    id="status"
+                                    value="Not Issued"
+                                    readOnly
+                                />
+                            </div>
 
-                    <button type="button" className="addNewUserModalButton" onClick={handleAddUser}>Add Asset</button>
-                    <button type="button" className="closeAddNewUserModalButton" onClick={toggleAddNewUserModal}>Close</button>
-                </form>
+                            <button type="button" className="addNewUserModalButton" onClick={handleAddUser}>Add Asset</button>
+                            <button type="button" className="closeAddNewUserModalButton" onClick={toggleAddNewUserModal}>Close</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
             )}
 
             {isViewAssetModalOpen && selectedAsset && (
@@ -361,29 +363,29 @@ function AvailableDevices() {
             )}
 
             {isNameInputModalOpen && (
-            <div className='issuedNameInputOverlay'>
-                <div className='modalContentContainer'>
-                    <h4>Enter Issuer Name</h4>
-                    <input
-                        type="text"
-                        value={issuerName}
-                        onChange={handleNameInputChange}
-                        placeholder="Enter the issuer's name"
-                    />
-                    <button onClick={handleDone}>Done</button>
-                    <button onClick={() => setIsNameInputModalOpen(false)}>Cancel</button>
+                <div className='issuedNameInputOverlay'>
+                    <div className='modalContentContainer'>
+                        <h4>Enter Issuer Name</h4>
+                        <input
+                            type="text"
+                            value={issuerName}
+                            onChange={handleNameInputChange}
+                            placeholder="Enter the issuer's name"
+                        />
+                        <button onClick={handleDone}>Done</button>
+                        <button onClick={() => setIsNameInputModalOpen(false)}>Cancel</button>
+                    </div>
                 </div>
-            </div>
             )}
 
             {isConfirmModalOpen && (
-            <div className='confirmationModalOverlay'>
-                <div className='modalContentContainer'>
-                    <h4>Are you sure you want to mark this asset as Issued?</h4>
-                    <button onClick={handleConfirm}>Yes</button>
-                    <button onClick={handleCancelConfirm}>No</button>
+                <div className='confirmationModalOverlay'>
+                    <div className='modalContentContainer'>
+                        <h4>Are you sure you want to mark this asset as Issued?</h4>
+                        <button onClick={handleConfirm}>Yes</button>
+                        <button onClick={handleCancelConfirm}>No</button>
+                    </div>
                 </div>
-            </div>
             )}
 
         </div>
